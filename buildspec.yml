@@ -3,6 +3,7 @@ phases:
   pre_build:
     commands:
       - pip install --upgrade awscli
+      - dotnet tool install -g Amazon.Lambda.Tools
       - dotnet restore xmlchecker/xmlchecker.csproj
       - dotnet restore xmlchecker.Tests/xmlchecker.Tests.csproj
   build:
