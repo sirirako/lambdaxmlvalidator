@@ -9,7 +9,7 @@ phases:
     commands:
       - dotnet publish -c release -o ./build_output xmlchecker/xmlchecker.csproj
       - dotnet publish -c release -o ./test_output xmlchecker.Tests/xmlchecker.Tests.csproj
-      - dotnet vstest xmlchecker/test_output/xmlchecker.Test.dll
+      - dotnet vstest xmlchecker/test_output/xmlchecker.Tests.dll
       - cd xmlchecker
       - dotnet lambda package-ci --s3-bucket siri-sandbox-build --output-template xmlchecker-updated-serverless.template --template serverless.yml
 artifacts:
