@@ -16,3 +16,4 @@ phases:
 artifacts:
   files:
     - ./xmlchecker/xmlchecker-updated-serverless.template
+  discard-paths: yes
