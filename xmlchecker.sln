@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xmlchecker", "xmlchecker\xm
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xmlchecker.Tests", "xmlchecker.Tests\xmlchecker.Tests.csproj", "{99E59EE3-9EA2-42B6-8BE5-32FB30E16C09}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D0BF448-D6D6-457F-BCAC-0BEEFBD7A0E8}"
+	ProjectSection(SolutionItems) = preProject
+		buildspec.yml = buildspec.yml
+		readme.md = readme.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

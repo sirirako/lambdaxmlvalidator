@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - pip install --upgrade awscli
+      - dotnet restore xmlchecker/xmlchecker.csproj
+      - dotnet restore xmlchecker.Test/xmlchecker.Tests.csproj
+  build:
+    commands:
+      - dotnet publish -c release -o ./build_output xmlchecker/xmlchecker.csproj
+      - dotnet publish -c release -o ./test_output xmlchecker.Test/xmlchecker.Tests.csproj
+      - dotnet vstest xmlchecker/test_output/xmlchecker.Test.dll
+      - cd xmlchecker
+      - dotnet lambda package-ci --s3-bucket siri-sandbox-build --output-template xmlchecker-updated-serverless.template --template serverless.yml
+artifacts:
+  files:
+    - ./xmlchecker/xmlchecker-updated-serverless.template
