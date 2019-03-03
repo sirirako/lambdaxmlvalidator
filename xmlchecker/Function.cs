@@ -35,6 +35,7 @@ namespace xmlchecker
         /// </summary>
         public Function()
         {
+            Amazon.XRay.Recorder.Handlers.AwsSdk.AWSSDKHandler.RegisterXRayForAllServices();
             S3Client = new AmazonS3Client();
             var bucketName = System.Environment.GetEnvironmentVariable(BUCKET_NAME);
             var schemaName = System.Environment.GetEnvironmentVariable(SCHEMA_FILENAME);

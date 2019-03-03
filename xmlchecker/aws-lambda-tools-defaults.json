@@ -16,6 +16,6 @@
     "function-handler"     : "xmlchecker::xmlchecker.Function::FunctionHandler",
     "function-name"        : "xmlchecker",
     "function-role"        : "arn:aws:iam::573575823092:role/lambdafullaccess",
-    "tracing-mode"         : "PassThrough",
+    "tracing-mode"         : "Active",
     "environment-variables" : "\"BUCKET_NAME\"=\"siri-lambda-test\";\"SCHEMA_FILENAME\"=\"books.xsd\";\"SCHEMA\"=\"false\""
 }
