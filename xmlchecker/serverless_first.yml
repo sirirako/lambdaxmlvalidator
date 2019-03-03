@@ -7,7 +7,7 @@ Resources:
     Properties:
       Handler: xmlchecker::xmlchecker.Function::FunctionHandler
       Runtime: dotnetcore2.1
-      CodeUri: ''
+      CodeUri: "bin/release/netcoreapp2.1/publish"
       MemorySize: 1024
       Timeout: 3
       Role: 'arn:aws:iam::573575823092:role/lambdafullaccess'
