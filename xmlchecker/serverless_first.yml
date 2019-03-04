@@ -14,17 +14,17 @@ Resources:
       Tracing: Active
       Environment:
         Variables:
-            BUCKET_NAME: siri-lambda-test
-            SCHEMA_FILENAME: books.xsd
-            SCHEMA: false
-     AutoPublishAlias: live
-     DeploymentPreference:
-       Type: Canary10Percent10Minutes 
-       Alarms:
+          BUCKET_NAME: siri-lambda-test
+          SCHEMA_FILENAME: books.xsd
+          SCHEMA: false
+      AutoPublishAlias: live
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes 
+        Alarms:
          # A list of alarms that you want to monitor
-         - !Ref AliasErrorMetricGreaterThanZeroAlarm
-         - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
-       Hooks:
+          - !Ref AliasErrorMetricGreaterThanZeroAlarm
+          - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+        Hooks:
          # Validation Lambda functions that are run before & after traffic shifting
-         PreTraffic: !Ref PreTrafficLambdaFunction
-         PostTraffic: !Ref PostTrafficLambdaFunction
+          PreTraffic: !Ref PreTrafficLambdaFunction
+          PostTraffic: !Ref PostTrafficLambdaFunction

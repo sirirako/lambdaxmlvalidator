@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A starter AWS Lambda function.
+Resources:
+  xmlcheckerc:
+    Properties:
+      AutoPublishAlias: live
+      CodeUri: s3://siri-sandbox-build/650e2266e3b4762e1093720e6f8749fc
+      DeploymentPreference:
+        Alarms:
+        - Ref: AliasErrorMetricGreaterThanZeroAlarm
+        - Ref: LatestVersionErrorMetricGreaterThanZeroAlarm
+        Hooks:
+          PostTraffic:
+            Ref: PostTrafficLambdaFunction
+          PreTraffic:
+            Ref: PreTrafficLambdaFunction
+        Type: Canary10Percent10Minutes
+      Environment:
+        Variables:
+          BUCKET_NAME: siri-lambda-test
+          SCHEMA: false
+          SCHEMA_FILENAME: books.xsd
+      Handler: xmlchecker::xmlchecker.Function::FunctionHandler
+      MemorySize: 1024
+      Role: arn:aws:iam::573575823092:role/lambdafullaccess
+      Runtime: dotnetcore2.1
+      Timeout: 3
+      Tracing: Active
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31
