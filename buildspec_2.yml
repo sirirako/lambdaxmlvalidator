@@ -12,7 +12,7 @@ phases:
       - dotnet publish -c release -o ./test_output xmlchecker.Tests/xmlchecker.Tests.csproj
       - dotnet vstest xmlchecker.Tests/test_output/xmlchecker.Tests.dll
       - cd xmlchecker
-      - aws cloudformation package --s3-bucket siri-sandbox-build --output-template xmlchecker-serverless.template --template-file .\serverless_first.yml
+      - aws cloudformation package --s3-bucket siri-sandbox-build --output-template xmlchecker-serverless.template --template-file serverless_first.yml
 artifacts:
   files:
     - ./xmlchecker/xmlchecker-serverless.template
