@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: A starter AWS Lambda function.
 Resources:
-  xmlchecker:
+  xmlcheckerc:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: xmlchecker::xmlchecker.Function::FunctionHandler
@@ -17,3 +17,14 @@ Resources:
             BUCKET_NAME: siri-lambda-test
             SCHEMA_FILENAME: books.xsd
             SCHEMA: false
+     AutoPublishAlias: live
+     DeploymentPreference:
+       Type: Canary10Percent10Minutes 
+       Alarms:
+         # A list of alarms that you want to monitor
+         - !Ref AliasErrorMetricGreaterThanZeroAlarm
+         - !Ref LatestVersionErrorMetricGreaterThanZeroAlarm
+       Hooks:
+         # Validation Lambda functions that are run before & after traffic shifting
+         PreTraffic: !Ref PreTrafficLambdaFunction
+         PostTraffic: !Ref PostTrafficLambdaFunction

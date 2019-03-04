@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  pre_build:
+    commands:
+      - pip install --upgrade awscli
+      - dotnet tool install -g Amazon.Lambda.Tools
+      - dotnet restore xmlchecker/xmlchecker.csproj
+      - dotnet restore xmlchecker.Tests/xmlchecker.Tests.csproj
+  build:
+    commands:
+      - dotnet publish -c release -o ./build_output xmlchecker/xmlchecker.csproj
+      - dotnet publish -c release -o ./test_output xmlchecker.Tests/xmlchecker.Tests.csproj
+      - dotnet vstest xmlchecker.Tests/test_output/xmlchecker.Tests.dll
+      - cd xmlchecker
+      - sam package --s3-bucket siri-sandbox-build --output-template xmlchecker-serverless.template --template-file .\serverless_first.yml
+artifacts:
+  files:
+    - ./xmlchecker/xmlchecker-serverless.template
+  discard-paths: yes
