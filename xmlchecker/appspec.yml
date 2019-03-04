@@ -1,9 +1,9 @@
 ﻿version: 0.0
 Resources:
-  - xmlcheckerc:
+  - xmlchecker:
       Type: AWS::Lambda::Function
       Properties:
-        Name: "xmlcheckerc"
-        Alias: "myLambdaFunctionAlias"
+        Name: "xmlchecker"
+        Alias: "Dev"
         CurrentVersion: "1"
         TargetVersion: "2"

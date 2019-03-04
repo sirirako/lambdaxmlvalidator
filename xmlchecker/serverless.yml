@@ -14,6 +14,9 @@ Resources:
       Tracing: Active
       Environment:
         Variables:
-            BUCKET_NAME: siri-lambda-test
-            SCHEMA_FILENAME: books.xsd
-            SCHEMA: false
+          BUCKET_NAME: siri-lambda-test
+          SCHEMA_FILENAME: books.xsd
+          SCHEMA: false
+      AutoPublishAlias: Dev
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes

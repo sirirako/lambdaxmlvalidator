@@ -84,10 +84,8 @@ namespace xmlchecker
                     byte[] byteArray = Encoding.ASCII.GetBytes(s3object);
                     MemoryStream stream = new MemoryStream(byteArray);
                     XmlReader xmlReaderS3object = XmlReader.Create(stream);
-                    //context.Logger.LogLine(stxsd);
-                    //System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
-                    //string curFile = "/tmp/books.xsd";
-                    //context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
+                    string curFile = "/tmp/books.xsd";
+                    context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                     //settings.Schemas.Add("urn:bookstore-schema","/tmp/books.xsd");
                     settings.CheckCharacters = true;
                     //settings.ValidationType = ValidationType.Schema;
