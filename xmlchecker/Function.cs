@@ -94,7 +94,7 @@ namespace xmlchecker
                     context.Logger.LogLine(Schema_Target);
                     //settings.Schemas.Add(Schema_Target, curFile);
                     settings.CheckCharacters = true;
-                    //settings.ValidationType = ValidationType.Schema;
+                    settings.ValidationType = ValidationType.Schema;
                     //context.Logger.LogLine(s3object);
 
                     XmlReader reader = XmlReader.Create(xmlReaderS3object, settings);
