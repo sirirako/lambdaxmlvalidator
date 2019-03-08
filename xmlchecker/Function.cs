@@ -45,6 +45,7 @@ namespace xmlchecker
             stxsd = GetObject(bucketName, schemaName).Result;
             //stxsd = GetObject("siri-lambda-test","books.xsd").Result;
             System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
+            Console.WriteLine(Schema_Target);
 
         }
 
