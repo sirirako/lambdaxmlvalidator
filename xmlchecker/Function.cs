@@ -45,7 +45,7 @@ namespace xmlchecker
             stxsd = GetObject(bucketName, schemaName).Result;
             //stxsd = GetObject("siri-lambda-test","books.xsd").Result;
             System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
-            Console.WriteLine(Schema_Target);
+            
 
         }
 
@@ -89,7 +89,7 @@ namespace xmlchecker
                     XmlReader xmlReaderS3object = XmlReader.Create(stream);
                     string curFile = "/tmp/books.xsd";
                     //context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
-                    context.Logger.LogLine("version 2");
+                    context.Logger.LogLine("version 9");
 
                     settings.Schemas.Add("urn:books", "/tmp/books.xsd");
                     context.Logger.LogLine(Schema_Target);
