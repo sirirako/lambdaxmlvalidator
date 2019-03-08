@@ -19,4 +19,4 @@ Resources:
           SCHEMA: urn:bookstore-schema
       AutoPublishAlias: Dev
       DeploymentPreference:
-        Type: Canary10Percent10Minutes
+        Type: AllAtOnce

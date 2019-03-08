@@ -87,10 +87,11 @@ namespace xmlchecker
                     MemoryStream stream = new MemoryStream(byteArray);
                     XmlReader xmlReaderS3object = XmlReader.Create(stream);
                     string curFile = "/tmp/books.xsd";
-                    context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
+                    //context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                     context.Logger.LogLine("version 2");
 
                     //settings.Schemas.Add("urn:bookstore-schema","/tmp/books.xsd");
+                    context.Logger.LogLine(Schema_Target);
                     settings.Schemas.Add(Schema_Target, curFile);
                     settings.CheckCharacters = true;
                     //settings.ValidationType = ValidationType.Schema;
