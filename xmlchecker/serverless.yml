@@ -16,7 +16,7 @@ Resources:
         Variables:
           BUCKET_NAME: siri-lambda-test
           SCHEMA_FILENAME: books.xsd
-          SCHEMA: urn:bookstore-schema
+          SCHEMA: urn:books
       AutoPublishAlias: Dev
       DeploymentPreference:
         Type: AllAtOnce

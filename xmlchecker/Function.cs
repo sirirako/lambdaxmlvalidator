@@ -91,7 +91,7 @@ namespace xmlchecker
                     //context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                     context.Logger.LogLine("version 2");
 
-                    settings.Schemas.Add("urn:bookstore-schema","/tmp/books.xsd");
+                    settings.Schemas.Add("urn:books", "/tmp/books.xsd");
                     context.Logger.LogLine(Schema_Target);
                     //settings.Schemas.Add(Schema_Target, curFile);
                     settings.CheckCharacters = true;
