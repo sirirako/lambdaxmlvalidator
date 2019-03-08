@@ -33,5 +33,5 @@ dotnet lambda package-ci --s3-bucket siri-sandbox-build --output-template xmlche
 3. Configure CodeBuild project
 4. Configure CodePipeline with CodeCommit, CodeBuild and Cloudformation Create Changeset and Execute Changeset.
 
-## Deploy serverless project using CodeDeploy
+
 

@@ -28,6 +28,8 @@ namespace xmlchecker
         const string SCHEMA_FILENAME = "";
         const string SCHEMA = "";
 
+        public string Schema_Target { get; set; }
+
         /// <summary>
         /// Default constructor. This constructor is used by Lambda to construct the instance. When invoked in a Lambda environment
         /// the AWS credentials will come from the IAM role associated with the function and the AWS region will be set to the
@@ -39,7 +41,7 @@ namespace xmlchecker
             S3Client = new AmazonS3Client();
             var bucketName = System.Environment.GetEnvironmentVariable(BUCKET_NAME);
             var schemaName = System.Environment.GetEnvironmentVariable(SCHEMA_FILENAME);
-            var checktype = System.Environment.GetEnvironmentVariable(SCHEMA);
+            Schema_Target = System.Environment.GetEnvironmentVariable(SCHEMA);
             stxsd = GetObject(bucketName, schemaName).Result;
             //stxsd = GetObject("siri-lambda-test","books.xsd").Result;
             System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
@@ -87,7 +89,9 @@ namespace xmlchecker
                     string curFile = "/tmp/books.xsd";
                     context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                     context.Logger.LogLine("version 2");
+
                     //settings.Schemas.Add("urn:bookstore-schema","/tmp/books.xsd");
+                    settings.Schemas.Add(Schema_Target, curFile);
                     settings.CheckCharacters = true;
                     //settings.ValidationType = ValidationType.Schema;
                     //context.Logger.LogLine(s3object);
@@ -97,9 +101,9 @@ namespace xmlchecker
                     try
                     {
                         document.Load(reader);
-                        //ValidationEventHandler eventHandler = new ValidationEventHandler(ValidationCallBack);
+                        ValidationEventHandler eventHandler = new ValidationEventHandler(ValidationCallBack);
 
-                        //document.Validate(eventHandler);
+                        document.Validate(eventHandler);
                         return "good";
                     } catch (Exception e)
                     {

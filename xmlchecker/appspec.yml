@@ -1,9 +1,0 @@
-﻿version: 0.0
-Resources:
-  - xmlchecker:
-      Type: AWS::Lambda::Function
-      Properties:
-        Name: "xmlchecker-xmlchecker-1C0WEPTFB2YF6"
-        Alias: "Test"
-        CurrentVersion: "1"
-        TargetVersion: "1"

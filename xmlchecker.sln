@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D0BF448-D6D6-457F-BCAC-0BEEFBD7A0E8}"
 	ProjectSection(SolutionItems) = preProject
 		buildspec.yml = buildspec.yml
-		buildspec_2.yml = buildspec_2.yml
 		readme.md = readme.md
 	EndProjectSection
 EndProject
