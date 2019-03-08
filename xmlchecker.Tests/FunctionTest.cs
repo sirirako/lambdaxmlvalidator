@@ -34,8 +34,8 @@ namespace xmlchecker.Tests
             var bucketName = "siri-lambda-test";
             var schemaName = "books.xsd";
             var checktype = "False";
-            var fileNameGood = "bookstore.xml";
-            var fileNameFail = "bookstorefail.xml";
+            var fileNameGood = "booksSchemaPass.xml";
+            var fileNameFail = "booksSchemaFail.xml";
             var s3Event = new S3Event
             {
                 Records = new List<S3EventNotification.S3EventNotificationRecord>
