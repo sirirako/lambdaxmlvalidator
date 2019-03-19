@@ -24,11 +24,9 @@ namespace xmlchecker
 
         string stxsd { get; set; }
 
-        const string BUCKET_NAME = "";
-        const string SCHEMA_FILENAME = "";
-        const string SCHEMA = "";
-
         public string Schema_Target { get; set; }
+        public string schemaName { get; set; }
+        public string bucketName { get; set; }
 
         /// <summary>
         /// Default constructor. This constructor is used by Lambda to construct the instance. When invoked in a Lambda environment
@@ -39,12 +37,12 @@ namespace xmlchecker
         {
             Amazon.XRay.Recorder.Handlers.AwsSdk.AWSSDKHandler.RegisterXRayForAllServices();
             S3Client = new AmazonS3Client();
-            var bucketName = System.Environment.GetEnvironmentVariable(BUCKET_NAME);
-            var schemaName = System.Environment.GetEnvironmentVariable(SCHEMA_FILENAME);
-            Schema_Target = System.Environment.GetEnvironmentVariable(SCHEMA);
+            bucketName = System.Environment.GetEnvironmentVariable("BUCKET_NAME");
+            schemaName = System.Environment.GetEnvironmentVariable("SCHEMA_FILENAME");
+            Schema_Target = System.Environment.GetEnvironmentVariable("SCHEMA");
             stxsd = GetObject(bucketName, schemaName).Result;
             //stxsd = GetObject("siri-lambda-test","books.xsd").Result;
-            System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
+            //System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
             
 
         }
@@ -55,9 +53,13 @@ namespace xmlchecker
         /// Constructs an instance with a preconfigured S3 client. This can be used for testing the outside of the Lambda environment.
         /// </summary>
         /// <param name="s3Client"></param>
-        public Function(IAmazonS3 s3Client)
+        public Function(IAmazonS3 s3Client, string bucketName, string schemaName)
         {
             this.S3Client = s3Client;
+            stxsd = GetObject(bucketName, schemaName).Result;
+            
+            //stxsd = GetObject("siri-lambda-test","books.xsd").Result;
+            //System.IO.File.WriteAllText(@"c:\tmp\books.xsd", stxsd);
         }
 
         /// <summary>
@@ -87,19 +89,16 @@ namespace xmlchecker
                     byte[] byteArray = Encoding.ASCII.GetBytes(s3object);
                     MemoryStream stream = new MemoryStream(byteArray);
                     XmlReader xmlReaderS3object = XmlReader.Create(stream);
+                    System.IO.File.WriteAllText("/tmp/books.xsd", stxsd);
                     string curFile = "/tmp/books.xsd";
-                    context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
-                    context.Logger.LogLine("version 10");
-
-                    //context.Logger.LogLine(s3object);
-                    
-
+                    //context.Logger.LogLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
+                    context.Logger.LogLine("Validating "+ s3Event.Object.Key);
+                    context.Logger.LogLine("Schema File Name: " + schemaName);
                     //settings.Schemas.Add("urn:books", "/tmp/books.xsd");
                     
                     settings.Schemas.Add(Schema_Target, curFile);
                     settings.CheckCharacters = true;
                     settings.ValidationType = ValidationType.Schema;
-                    //context.Logger.LogLine(s3object);
 
                     XmlReader reader = XmlReader.Create(xmlReaderS3object, settings);
                     XmlDocument document = new XmlDocument();
@@ -128,7 +127,8 @@ namespace xmlchecker
 
         public async Task<string> GetObject(string bucket, string key)
         {
-            var response = await S3Client.GetObjectAsync("siri-lambda-test", "books.xsd");
+            //var response = await S3Client.GetObjectAsync("siri-lambda-test", "books.xsd");
+            var response = await S3Client.GetObjectAsync(bucket, key);
             using (var reader = new StreamReader(response.ResponseStream))
             {
                 String s3object = await reader.ReadToEndAsync();

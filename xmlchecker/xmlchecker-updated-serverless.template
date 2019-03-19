@@ -7,7 +7,7 @@ Resources:
     Properties:
       Handler: xmlchecker::xmlchecker.Function::FunctionHandler
       Runtime: dotnetcore2.1
-      CodeUri: s3://siri-sandbox-build/xmlchecker-CodeUri-636872141091772529-636872141092537520.zip
+      CodeUri: s3://siri-sandbox-build/xmlchecker-CodeUri-636885995592314569-636885995735125010.zip
       MemorySize: 1024
       Timeout: 3
       Role: 'arn:aws:iam::573575823092:role/lambdafullaccess'
@@ -16,5 +16,8 @@ Resources:
         Variables:
           BUCKET_NAME: siri-lambda-test
           SCHEMA_FILENAME: books.xsd
-          SCHEMA: false
+          SCHEMA: urn:books
+      AutoPublishAlias: Dev
+      DeploymentPreference:
+        Type: AllAtOnce
 ...

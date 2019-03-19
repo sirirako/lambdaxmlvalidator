@@ -51,7 +51,7 @@ namespace xmlchecker.Tests
                     }
             };
             
-            var function = new Function(s3client);
+            var function = new Function(s3client,bucketName,schemaName);
             var context = new TestLambdaContext();
             var result = await function.FunctionHandler(s3Event, context);
             
